@@ -147,6 +147,17 @@ a:hover {
   }
 }
 
+/* Mobile hamburger button — must be in globals (not scoped JSX) */
+.mobile-menu-btn {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+
 /* === Typography === */
 .page-title {
   font-size: 2rem;

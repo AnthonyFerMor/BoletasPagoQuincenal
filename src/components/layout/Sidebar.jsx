@@ -55,11 +55,29 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile toggle button */}
+      {/* Mobile toggle button — inline styles to avoid scoping issues */}
       <button
         className="mobile-menu-btn"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle navigation"
+        style={{
+          position: 'fixed',
+          top: '0.75rem',
+          left: '0.75rem',
+          zIndex: 1001,
+          background: 'rgba(15, 23, 42, 0.95)',
+          border: '1px solid #10b981',
+          borderRadius: '8px',
+          color: '#10b981',
+          padding: 0,
+          cursor: 'pointer',
+          width: '42px',
+          height: '42px',
+          display: 'none',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.5), 0 0 8px rgba(16,185,129,0.2)',
+        }}
       >
         {mobileOpen ? <X size={22} /> : <Menu size={22} />}
       </button>
@@ -79,12 +97,11 @@ export default function Sidebar() {
             <div className="sidebar-logo-icon">
               <Building2 size={20} />
             </div>
-            {!collapsed && (
-              <div className="sidebar-logo-text">
-                <span className="sidebar-logo-title">SCPSC</span>
-                <span className="sidebar-logo-subtitle">Santa Clara S.R.L.</span>
-              </div>
-            )}
+            {/* Always render but hide via CSS when collapsed on desktop */}
+            <div className="sidebar-logo-text sidebar-collapsible">
+              <span className="sidebar-logo-title">SCPSC</span>
+              <span className="sidebar-logo-subtitle">Santa Clara S.R.L.</span>
+            </div>
           </div>
           <button
             className="sidebar-toggle"
@@ -100,7 +117,7 @@ export default function Sidebar() {
           {navSections.map((section, sIdx) => (
             <div key={sIdx}>
               {sIdx > 0 && <div className="sidebar-divider" />}
-              {!collapsed && <div className="sidebar-section-label">{section.label}</div>}
+              <div className="sidebar-section-label sidebar-collapsible">{section.label}</div>
               {section.items.map((item) => {
                 const Icon = item.icon;
                 const isActive = pathname === item.href ||
@@ -115,7 +132,7 @@ export default function Sidebar() {
                     title={collapsed ? item.label : undefined}
                   >
                     <Icon size={19} className="sidebar-link-icon" />
-                    {!collapsed && <span className="sidebar-link-label">{item.label}</span>}
+                    <span className="sidebar-link-label sidebar-collapsible">{item.label}</span>
                     {isActive && <div className="sidebar-active-indicator" />}
                   </Link>
                 );
@@ -125,21 +142,19 @@ export default function Sidebar() {
         </nav>
 
         {/* Footer */}
-        {!collapsed && (
-          <div className="sidebar-footer">
-            <div className="sidebar-footer-text">
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{user?.nombre || 'Usuario'}</span>
-              <span style={{ fontSize: '0.625rem', color: 'var(--text-muted)' }}>CJ: 3-102-754033 · v2.0</span>
-            </div>
-            <button
-              onClick={logout}
-              className="sidebar-logout-btn"
-              title="Cerrar Sesión"
-            >
-              <LogOut size={15} />
-            </button>
+        <div className="sidebar-footer sidebar-collapsible">
+          <div className="sidebar-footer-text">
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{user?.nombre || 'Usuario'}</span>
+            <span style={{ fontSize: '0.625rem', color: 'var(--text-muted)' }}>CJ: 3-102-754033 · v2.0</span>
           </div>
-        )}
+          <button
+            onClick={logout}
+            className="sidebar-logout-btn"
+            title="Cerrar Sesión"
+          >
+            <LogOut size={15} />
+          </button>
+        </div>
 
         <style jsx>{`
           .mobile-menu-btn {
@@ -323,6 +338,14 @@ export default function Sidebar() {
             animation: fadeIn 0.2s ease;
           }
 
+          .sidebar-collapsible {
+            overflow: hidden;
+            transition: opacity 0.2s ease, width 0.2s ease;
+          }
+
+          .sidebar--collapsed .sidebar-collapsible {
+            display: none;
+          }
 
           .sidebar-active-indicator {
             position: absolute;
@@ -380,14 +403,17 @@ export default function Sidebar() {
               display: block;
               position: fixed;
               inset: 0;
-              background: rgba(0, 0, 0, 0.5);
-              z-index: 99;
+              background: rgba(0, 0, 0, 0.6);
+              backdrop-filter: blur(2px);
+              z-index: 999;
               animation: fadeIn 0.2s ease;
             }
 
             .sidebar {
               transform: translateX(-100%);
-              width: var(--sidebar-width);
+              width: var(--sidebar-width) !important;
+              z-index: 1000;
+              box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
             }
 
             .sidebar--mobile-open {
@@ -395,7 +421,17 @@ export default function Sidebar() {
             }
 
             .sidebar--collapsed {
-              width: var(--sidebar-width);
+              width: var(--sidebar-width) !important;
+            }
+
+            /* Force all collapsible elements visible on mobile drawer */
+            .sidebar--collapsed .sidebar-collapsible {
+              display: flex !important;
+            }
+
+            .sidebar--collapsed .sidebar-link-label,
+            .sidebar--collapsed .sidebar-section-label {
+              display: inline !important;
             }
 
             .sidebar-toggle {
