@@ -156,7 +156,7 @@ export default function EmpleadosPage() {
 
   return (
     <div className="animate-in">
-      <div className="flex items-center justify-between mb-3">
+      <div className="page-header">
         <div>
           <h1 className="page-title">Empleados</h1>
           <p className="page-subtitle">
@@ -191,7 +191,7 @@ export default function EmpleadosPage() {
           <div className="text-sm text-muted mt-1">Ajuste la búsqueda o registre uno nuevo.</div>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1rem' }} className="stagger-children">
+        <div className="responsive-cards-grid stagger-children">
           {empleados.map((emp, idx) => {
             const semHrs = calcularHorasSemanales(emp.horario);
             const mesHrs = calcularHorasMensuales(emp.horario);
@@ -215,7 +215,7 @@ export default function EmpleadosPage() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem', margin: '1rem 0', padding: '0.75rem', background: 'rgba(15,23,42,0.4)', borderRadius: 'var(--radius-sm)' }}>
+                <div className="responsive-grid-3" style={{ margin: '1rem 0', padding: '0.75rem', background: 'rgba(15,23,42,0.4)', borderRadius: 'var(--radius-sm)' }}>
                   <div>
                     <div className="text-xs text-muted uppercase">Salario</div>
                     <div className="font-mono font-semibold text-sm" style={{ color: 'var(--accent-400)' }}>{formatColones(emp.salarioBruto)}</div>
@@ -277,7 +277,7 @@ export default function EmpleadosPage() {
       {/* Create/Edit Modal */}
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={editingId ? 'Editar Empleado' : 'Nuevo Empleado'}>
         <form onSubmit={handleSubmit}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2">
             <div className="form-group">
               <label className="form-label">Cédula *</label>
               <input 
@@ -298,7 +298,7 @@ export default function EmpleadosPage() {
             <label className="form-label">Nombre Completo *</label>
             <input className="form-input" value={form.nombre} onChange={e => setForm({ ...form, nombre: e.target.value })} placeholder="Nombre y apellidos" />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2">
             <div className="form-group">
               <label className="form-label">Puesto</label>
               <input className="form-input" value={form.puesto} onChange={e => setForm({ ...form, puesto: e.target.value })} placeholder="Ej: Asistente de Cuidado" />

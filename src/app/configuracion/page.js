@@ -87,12 +87,12 @@ export default function ConfiguracionPage() {
 
   return (
     <div className="animate-in">
-      <div className="flex items-center justify-between mb-3">
+      <div className="page-header">
         <div>
           <h1 className="page-title">Configuración</h1>
           <p className="page-subtitle">Parámetros globales del sistema de planilla</p>
         </div>
-        <div className="flex gap-sm">
+        <div className="page-header-actions">
           <button className="btn btn-ghost btn-sm" onClick={() => setConfirmReset(true)}>
             <RotateCcw size={15} /> Restaurar
           </button>
@@ -114,7 +114,7 @@ export default function ConfiguracionPage() {
           <h2 className="section-title" style={{ marginBottom: 0 }}>Parámetros de Cálculo</h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
+        <div className="responsive-cards-grid">
           {paramConfig.map((p) => {
             const isCustom = localParams[p.clave] !== DEFAULT_PARAMETROS[p.clave];
             return (
@@ -151,7 +151,7 @@ export default function ConfiguracionPage() {
           Configure en qué mes y quincena se procesará el aguinaldo anualmente.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', maxWidth: '600px' }}>
+        <div className="responsive-grid-2" style={{ maxWidth: '600px' }}>
           <div className="form-group">
             <label className="form-label">Mes de Pago</label>
             <select 
@@ -185,7 +185,7 @@ export default function ConfiguracionPage() {
           <h2 className="section-title" style={{ marginBottom: 0 }}>Seguridad</h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+        <div className="responsive-grid-2" style={{ gap: '2rem' }}>
           {/* Current User Info */}
           <div>
             <div className="text-sm text-muted mb-2">Usuario Actual</div>

@@ -163,7 +163,7 @@ export default function IncidenciasPage() {
 
   return (
     <div className="animate-in">
-      <div className="flex items-center justify-between mb-3">
+      <div className="page-header">
         <div>
           <h1 className="page-title">Incidencias</h1>
           <p className="page-subtitle">Ausencias, incapacidades y tardías con impacto en planilla</p>
@@ -197,7 +197,7 @@ export default function IncidenciasPage() {
 
       {/* Filter */}
       <div className="card mb-3" style={{ padding: '0.625rem 1rem' }}>
-        <div className="flex items-center gap-md">
+        <div className="flex items-center gap-md" style={{ flexWrap: 'wrap' }}>
           <Filter size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
           <select className="form-select" value={filterEmpleado} onChange={e => setFilterEmpleado(e.target.value)} style={{ maxWidth: '280px' }}>
             {[

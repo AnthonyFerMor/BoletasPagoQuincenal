@@ -80,7 +80,7 @@ export default function ReportesPage() {
 
   return (
     <div className="animate-in">
-      <div className="flex items-center justify-between mb-3">
+      <div className="page-header">
         <div>
           <h1 className="page-title">Reportes e Historial</h1>
           <p className="page-subtitle">Planillas procesadas y boletas de pago</p>
@@ -119,12 +119,12 @@ export default function ReportesPage() {
             return (
               <div key={periodo.id} className="card p-0 overflow-hidden">
                 <div 
-                  className="flex items-center justify-between cursor-pointer" 
+                  className="banner-content cursor-pointer" 
                   style={{ padding: '1.25rem', background: isExpanded ? 'rgba(31,41,55,0.5)' : 'transparent', transition: 'background var(--transition-fast)' }}
                   onClick={() => setExpandedPeriod(isExpanded ? null : periodo.id)}
                 >
-                  <div className="flex items-center gap-md">
-                    <div style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-md)', background: 'linear-gradient(135deg, var(--accent-500), var(--accent-700))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+                  <div className="banner-left" style={{ flexShrink: 0 }}>
+                    <div style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-md)', background: 'linear-gradient(135deg, var(--accent-500), var(--accent-700))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0 }}>
                       <Calendar size={20} />
                     </div>
                     <div>
@@ -135,7 +135,7 @@ export default function ReportesPage() {
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-md">
+                  <div className="banner-right">
                     <button 
                       onClick={(e) => handleDescargarPeriodo(periodo.id, boletas, e)}
                       className="btn btn-outline btn-sm"
@@ -167,7 +167,7 @@ export default function ReportesPage() {
 
                 {isExpanded && (
                   <div style={{ borderTop: '1px solid var(--border-primary)' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: 'var(--border-primary)' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '1px', background: 'var(--border-primary)' }}>
                       <div style={{ background: 'var(--bg-secondary)', padding: '1rem' }}>
                         <div className="flex items-center gap-sm text-muted text-xs mb-1"><TrendingUp size={13}/> Total Extras</div>
                         <div className="font-mono font-semibold">{fmt(totales.extras)}</div>

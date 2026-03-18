@@ -106,7 +106,7 @@ export default function DashboardPage() {
 
   return (
     <div className="animate-in">
-      <div className="flex items-center justify-between mb-3">
+      <div className="page-header">
         <div>
           <h1 className="page-title">Dashboard</h1>
           <p className="page-subtitle">Residencia Santa Clara S.R.L. — Panel de control</p>
@@ -116,9 +116,9 @@ export default function DashboardPage() {
       {/* Current Period Banner */}
       {periodoActual && (
         <div className="period-banner mb-3">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-md">
-              <div style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-md)', background: 'linear-gradient(135deg, var(--accent-500), var(--accent-700))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+          <div className="banner-content mb-2">
+            <div className="banner-left">
+              <div style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-md)', background: 'linear-gradient(135deg, var(--accent-500), var(--accent-700))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0 }}>
                 <Calendar size={20} />
               </div>
               <div>
@@ -128,7 +128,7 @@ export default function DashboardPage() {
                 <div className="text-sm text-muted">{periodoActual.fechaInicio} al {periodoActual.fechaFin}</div>
               </div>
             </div>
-            <div className="flex items-center gap-md">
+            <div className="banner-right">
               <span className={`badge ${periodoActual.estado === 'procesado' ? 'badge-success' : 'badge-warning'}`}>
                 <Clock size={12} /> {periodoActual.estado === 'procesado' ? 'PROCESADO' : 'PERÍODO ACTIVO'}
               </span>
@@ -162,7 +162,7 @@ export default function DashboardPage() {
 
       {/* Quick Actions */}
       <h2 className="section-title mb-2">Acciones Rápidas</h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem', marginBottom: '1.75rem' }} className="stagger-children">
+      <div className="responsive-cards-grid-sm stagger-children" style={{ marginBottom: '1.75rem' }}>
         {quickActions.map((action) => {
           const Icon = action.icon;
           return (
@@ -177,7 +177,7 @@ export default function DashboardPage() {
         })}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+      <div className="responsive-grid-2">
         {/* Recent Activity */}
         <div className="card" style={{ gridColumn: actividad.length === 0 ? '1 / -1' : undefined }}>
           <div className="flex items-center gap-sm mb-2">

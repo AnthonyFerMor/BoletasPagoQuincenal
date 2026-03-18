@@ -77,7 +77,7 @@ export default function ValesPage() {
 
   return (
     <div className="animate-in">
-      <div className="flex items-center justify-between mb-3">
+      <div className="page-header">
         <div>
           <h1 className="page-title">Vales y Adelantos</h1>
           <p className="page-subtitle">Registro de adelantos de salario — {state.vales.length} vales</p>
@@ -179,7 +179,7 @@ export default function ValesPage() {
               ]}
             </select>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="responsive-grid-2">
             <div className="form-group">
               <label className="form-label">Monto (₡) *</label>
               <input type="number" className="form-input" value={form.monto} onChange={e => setForm({ ...form, monto: e.target.value })} placeholder="25000" min="0" step="500" />
