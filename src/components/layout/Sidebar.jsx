@@ -145,20 +145,27 @@ export default function Sidebar() {
           .mobile-menu-btn {
             display: none;
             position: fixed;
-            top: 1rem;
-            left: 1rem;
+            top: 0.75rem;
+            left: 0.75rem;
             z-index: 1001;
             background: var(--bg-secondary);
-            border: 1px solid var(--border-primary);
+            border: 1px solid var(--accent-500);
             border-radius: var(--radius-sm);
-            color: var(--text-primary);
+            color: var(--accent-400);
             padding: 0.5rem;
             cursor: pointer;
             transition: all var(--transition-fast);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), var(--shadow-glow-sm);
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
           }
 
           .mobile-menu-btn:hover {
             background: var(--bg-tertiary);
+            border-color: var(--accent-400);
+            color: var(--accent-300);
           }
 
           .sidebar-overlay {
