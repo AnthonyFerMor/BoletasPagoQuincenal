@@ -156,6 +156,10 @@ a:hover {
   .mobile-menu-btn {
     display: flex !important;
   }
+
+  .page-header {
+    padding-left: 3.25rem;
+  }
 }
 
 /* === Typography === */
